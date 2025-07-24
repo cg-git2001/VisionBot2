@@ -1,14 +1,16 @@
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains.question_answering import load_qa_chain
-from langchain.chat_models import ChatOpenAI
+from langchain_community.vectorstores import FAISS
+from langchain_community.chat_models import ChatOpenAI
 
 st.set_page_config(page_title="VisionBot 💼", page_icon="🤖")
 st.sidebar.header("VisionBot2")
 st.sidebar.caption("Ask me anything from your HR manual. I'll *try* not to judge.")
+st.image("manuel.png", caption="🔹 The Book of Things You’ll Pretend to Know")
+
 
 with st.spinner("Processing your glorious bureaucracy..."):
     loader = PyPDFLoader("Manual.pdf")
