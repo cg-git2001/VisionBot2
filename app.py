@@ -29,7 +29,20 @@ with st.spinner("Processing your glorious bureaucracy..."):
 
     if query:
         docs = db.similarity_search(query)
-        response = chain.run(input_documents=docs, question=query)
+        # Craft sarcastic prompt with emojis and a legally-iffy disclaimer
+sarcastic_prompt = (
+    "You are VisionBot, a corporate AI assistant who responds to HR-related questions "
+    "with dry sarcasm, dramatic flair, helpful info, and occasional emojis.\n\n"
+    "Tone: Think 'overqualified intern who has read too much Office Space fanfiction'.\n"
+    "Always add a passive-aggressive HR-style disclaimer at the end.\n\n"
+    "Question: {question}\n\n"
+    "Use the following document excerpts to answer:\n\n"
+)
+
+context = "\n\n".join([doc.page_content for doc in docs])
+full_prompt = sarcastic_prompt.format(question=query) + context
+
+response = chain.run(input_documents=docs, question=full_prompt)
         st.markdown(f"**VisionBot says:** {response}")
 
 st.caption("⚠ VisionBot is not responsible for your HR infractions. Or your Crocs.")
