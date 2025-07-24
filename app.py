@@ -7,10 +7,9 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.chat_models import ChatOpenAI
 
 st.set_page_config(page_title="VisionBot 💼", page_icon="🤖")
-st.sidebar.header("VisionBot2")
-st.sidebar.caption("Ask me anything from your HR manual. I'll *try* not to judge.")
+st.markdown("## VisionBot2")
+st.caption("Ask me anything from your HR manual. I'll *try* not to judge.")
 st.image("manuel.png", caption="🔹 The Book of Things You’ll Pretend to Know")
-
 
 with st.spinner("Processing your glorious bureaucracy..."):
     loader = PyPDFLoader("Manual.pdf")
