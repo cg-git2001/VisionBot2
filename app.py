@@ -32,3 +32,11 @@ with st.spinner("Processing your glorious bureaucracy..."):
         docs = db.similarity_search(query)
         response = chain.run(input_documents=docs, question=query)
         st.markdown(f"**VisionBot says:** {response}")
+
+st.caption("⚠ VisionBot is not responsible for your HR infractions. Or your Crocs.")
+
+@st.cache_resource
+def load_pdf():
+    loader = PyPDFLoader("Manual.pdf")
+    return loader.load()
+data = load_pdf()
